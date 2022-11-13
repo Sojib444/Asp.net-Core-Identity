@@ -1,0 +1,17 @@
+﻿@page
+@model Identity.Pages.HRModel
+@{
+}
+
+<div>
+
+    @foreach (var item in Model.List)
+    {
+        <tr>
+            <td>@item.Date</td>
+            <td>@item.TemperatureC</td>
+            <td>@item.TemperatureF</td>
+            <td>@item.Summary</td>
+        </tr>
+    }
+</div>
