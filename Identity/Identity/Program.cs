@@ -9,7 +9,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddAuthentication("MyCookie").AddCookie("MyCookie",
                 options => { options.Cookie.Name = "MyCookie";
                     options.AccessDeniedPath = "/AccesDenied";
-                    options.ExpireTimeSpan=TimeSpan.FromSeconds(100);
+                    options.ExpireTimeSpan=TimeSpan.FromSeconds(300);
                 });
                 
 
@@ -19,9 +19,14 @@ builder.Services.AddAuthorization(options => options.AddPolicy("HRdetection",
 
 builder.Services.AddSingleton<IAuthorizationHandler, AuthorizationRequirmentHandeler>();
 
-builder.Services.AddHttpClient("MywebAPI", client =>
+//builder.Services.AddHttpClient("MywebAPI", client =>
+//{
+//    client.BaseAddress = new Uri("http://localhost:54445/");
+//});
+
+builder.Services.AddHttpClient("OurWebAPI", client =>
 {
-    client.BaseAddress = new Uri("http://localhost:41637");
+    client.BaseAddress = new Uri("https://localhost:44336/");
 });
 
 var app = builder.Build();

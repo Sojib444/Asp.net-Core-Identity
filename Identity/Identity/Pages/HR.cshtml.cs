@@ -9,21 +9,20 @@ namespace Identity.Pages
     [Authorize(Policy = "HRdetection")]
     public class HRModel : PageModel
     {
-        public IHttpClientFactory Factory { get; set; }
-        public HRModel(IHttpClientFactory factory)
-        {
-            Factory = factory;
-        }
+        private readonly IHttpClientFactory httpClientFactory;
 
         [BindProperty]
         public List<WeatherForecastDTO>? List { get; set; }
 
-
-
-        public async Task OnGet()
+        public HRModel(IHttpClientFactory httpClientFactory)
         {
-            var client=Factory.CreateClient("MywebAPI");
-            List = await client.GetFromJsonAsync<List<WeatherForecastDTO>>("WeatherForecast");
+            this.httpClientFactory = httpClientFactory;
+        }
+
+        public async Task OnGetAsync()
+        {
+            var httpClient = httpClientFactory.CreateClient("OurWebAPI");
+            List = await httpClient.GetFromJsonAsync<List<WeatherForecastDTO>>("WeatherForecast/Get");
         }
     }
 }
