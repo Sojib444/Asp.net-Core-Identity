@@ -10,6 +10,6 @@ namespace Identity.Authorization
         public string AccessToken { get; set; }
 
         [JsonProperty("expiryTime")]
-        public string ExpirayAt { get; set; }
+        public DateTime ExpirayAt { get; set; }
     }
 }
