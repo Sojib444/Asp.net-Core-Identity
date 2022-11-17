@@ -1,8 +1,12 @@
+using Identity.Authorization;
 using Identity.DTO;
+using Identity.Pages.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net.Http.Headers;
 
 namespace Identity.Pages
 {
@@ -22,7 +26,15 @@ namespace Identity.Pages
         public async Task OnGetAsync()
         {
             var httpClient = httpClientFactory.CreateClient("OurWebAPI");
-            List = await httpClient.GetFromJsonAsync<List<WeatherForecastDTO>>("WeatherForecast/Get");
+            var res = await httpClient.PostAsJsonAsync("Auth", new Login { Email="mdsojibhosen444@gmail.com",Password = "12345" });
+            res.EnsureSuccessStatusCode();
+            string content = await res.Content.ReadAsStringAsync();
+            var token = JsonConvert.DeserializeObject<JwtToken>(content);
+
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+
+
+            List = await httpClient.GetFromJsonAsync<List<WeatherForecastDTO>>("WeatherForecast");
         }
     }
 }

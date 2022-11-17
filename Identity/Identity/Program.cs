@@ -19,15 +19,10 @@ builder.Services.AddAuthorization(options => options.AddPolicy("HRdetection",
 
 builder.Services.AddSingleton<IAuthorizationHandler, AuthorizationRequirmentHandeler>();
 
-//builder.Services.AddHttpClient("MywebAPI", client =>
-//{
-//    client.BaseAddress = new Uri("http://localhost:54445/");
-//});
-
 builder.Services.AddHttpClient("OurWebAPI", client =>
-{
-    client.BaseAddress = new Uri("https://localhost:44336/");
-});
+            {
+                client.BaseAddress = new Uri("https://localhost:7188/");
+            });
 
 var app = builder.Build();
 
