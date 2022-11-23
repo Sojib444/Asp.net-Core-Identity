@@ -1,0 +1,46 @@
+﻿@page
+@model IdentityFrameworkWebApllication.Account.RegisterModel
+
+<p><h1>User Registration</h1></p>
+<div class="container border" style="padding:20px">
+    <form method="post">
+        <div asp-validation-summary="All">
+
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Credintial.Email"></label>
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for="Credintial.Email" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="Credintial.Email"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Credintial.Password"></label>
+            </div>
+            <div class="col-5">
+                <input type="password" asp-for="Credintial.Password" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="Credintial.Password"></span>
+        </div>
+
+@*        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="Credential.RememberMe"></label>
+            </div>
+            <div class="col-5">
+                <input type="checkbox" asp-for="Credential.RememberMe" class="form-check-input" />
+            </div>
+        </div>*@
+
+        <div class="form-group row">
+            <div class="col-2">
+                <input type="submit" class="btn btn-primary" value="Register" />
+            </div>
+            <div class="col-5">
+            </div>
+        </div>
+    </form>
+</div>
